@@ -151,20 +151,20 @@ def oficio_municipal(res, cod_muni, nombre_muni, cod_depto, nombre_depto, desde,
     if tot['ha'] or tot['f']:
         texto_agr = (f"sí se reportaron daños agrícolas en {_dec(tot['ha'])} "
                      f"{'hectárea' if tot['ha'] == 1 else 'hectáreas'} de "
-                     f"{_texto_lista(tot['cult']).lower()}, afectando a {_entero(tot['f'])} familias, "
+                     f"{_texto_lista(tot['cult']).lower()}, afectando a un estimado de {_entero(tot['f'])} familias, "
                      f"con una pérdida estimada de {_q(tot['q'])}.")
     else:
         texto_agr = 'no se reportaron daños agrícolas.'
     if pec:
         animales = ', '.join(f"{_entero(sum(r['animales'] or 0 for r in rs))} {esp.lower()}"
                              for (_, esp), rs in grupos.items())
-        texto_pec = (f'Se reportó la pérdida de {animales}, afectando a {_entero(pf)} familias, '
+        texto_pec = (f'Se reportó la pérdida de {animales}, afectando a un estimado de {_entero(pf)} familias, '
                      f'con una pérdida estimada de {_q(pq)}.')
     else:
         texto_pec = 'No hay reporte de daños pecuarios.'
     if inf:
         tipos = ', '.join(f"{x['tipo'].lower()} ({x['porcentaje']})" for x in inf)
-        texto_inf = (f'Se reportaron daños en {tipos}, afectando a {_entero(inf_f)} familias, '
+        texto_inf = (f'Se reportaron daños en {tipos}, afectando a un estimado de {_entero(inf_f)} familias, '
                      f'con una pérdida estimada de {_q(inf_q)}.')
     else:
         texto_inf = 'No hay reporte de daños de infraestructura agropecuaria.'
